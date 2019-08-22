@@ -12,5 +12,5 @@
     Now the project is in demo quality, so it has code smells and requires a huge refactoring 
     according to UML diagrams which were designed before the project implementation stage.
 
-    All the diagrams can be found in the **\UML Diagrams\Event Catalog.mdj** file. 
-    In order to open this file you have to download and install [StarUML](http://staruml.io/)
+All the diagrams can be found in the **\UML Diagrams\Event Catalog.mdj** file. 
+In order to open this file you have to download and install [StarUML](http://staruml.io/)
