@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EventCatalog.Domain.Models
+
+@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+
+@if (signInManager.IsSignedIn(User))
+{
+	var currentUser = await userManager.GetUserAsync(User);
+
+	bool isAdmin = 
+		currentUser != null && await userManager.IsInRoleAsync(currentUser, "Administrator");
+
+	if (isAdmin)
+	{
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a asp-controller="EventManagement" asp-action="Index">
+					Event Management
+				</a>
+			</li>
+			<li>
+				<a asp-controller="ManageUsers" asp-action="Index">
+					Manage Users
+				</a>
+			</li>
+		</ul>
+	}
+}

@@ -1,0 +1,105 @@
+﻿@using EventCatalog.Domain.Models
+@using Microsoft.AspNetCore.Identity
+@model EventViewModel
+
+@inject SignInManager<User> signInManager
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Event Details</h2>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="event-img">
+			<img class="img-responsive" src="~/images/eventImages/@Model.ImageName" alt="">
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="event-name">
+			<h1 class="event-name-text">@Html.DisplayFor(model => model.Name)</h1>
+		</div>
+		<div class="event-details">
+			<hr />
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.Type)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.Type)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.City)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.City)
+				</dd>
+				@if (!string.IsNullOrWhiteSpace(Model.Street))
+				{
+					<dt>
+						@Html.DisplayNameFor(model => model.Street)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Street)
+					</dd>
+				}
+				@if (!string.IsNullOrWhiteSpace(Model.Venue))
+				{
+					<dt>
+						@Html.DisplayNameFor(model => model.Venue)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Venue)
+					</dd>
+				}
+				<dt>
+					@Html.DisplayNameFor(model => model.StartTime)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.StartTime)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.EndTime)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.EndTime)
+				</dd>
+			</dl>
+			@if (!string.IsNullOrWhiteSpace(Model.Description))
+			{
+				<hr />
+				<dl class="dl-vertical">
+					<dt>
+						@Html.DisplayNameFor(model => model.Description)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Description)
+					</dd>
+				</dl>
+			}
+			@if (Model.Price > 0)
+			{
+				<hr />
+				<dl class="dl-vertical">
+					<dt>
+						Ticket price
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Price) @Html.DisplayFor(model => model.Currency)
+					</dd>
+				</dl>
+			}
+		</div>
+	</div>
+</div>
+<hr />
+<div class="back-to-list">
+	<a asp-action="Index">Back to List</a> |
+	<a href="@Model.OrganizerSite">Go to the event website</a>
+	@if (signInManager.IsSignedIn(User))
+	{
+		<a asp-action="AddToFavorites" asp-route-id="@Model.Id">| Add To Favorites</a>
+	}
+</div>

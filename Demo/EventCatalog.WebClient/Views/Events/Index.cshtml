@@ -1,0 +1,166 @@
+﻿@using EventCatalog.Domain.Contracts
+@using EventCatalog.Domain.Models
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<EventViewModel>
+
+@inject SignInManager<User> signInManager
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<form role="search" asp-controller="Events" asp-action="Index">
+			<div class="row">
+				<div class="form-group col-lg-4 col-md-4 col-sm-5">
+					<select id="city" name="city" class="form-control">
+						<option disabled selected>Choose a city</option>
+						<option value="Kiev">Kiev</option>
+						<option value="Kharkiv">Kharkiv</option>
+						<option value="Lviv">Lviv</option>
+						<option value="Moscow">Moscow</option>
+						<option value="all">All cities</option>
+					</select>
+				</div>
+				<div class="form-group col-lg-8 col-md-8 col-sm-7">
+					<div class="input-group">
+						<input type="text" name="eventName" class="form-control" placeholder="Search">
+						<span class="input-group-btn">
+							<button type="reset" class="btn btn-default">
+								<span class="glyphicon glyphicon-remove">
+									<span class="sr-only">Close</span>
+								</span>
+							</button>
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search">
+									<span class="sr-only">Search</span>
+								</span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-7">
+					<div class="panel panel-default">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title">Event Types</h3>
+						</div>
+						<div class="panel-body">
+							@foreach (EventType type in ViewBag.EventTypes)
+							{
+								<label class="checkbox-inline">
+									<input type="checkbox"
+										   id="eventType_@(type)"
+										   name="eventTypes"
+										   value="@type">
+									@type
+								</label>
+							}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-5">
+					<div class="panel panel-default">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title">Choose the most important search criteria</h3>
+						</div>
+						<div class="panel-body">
+							<label class="radio-inline">
+								<input type="radio" name="searchCriteria" id="relevance" value="relevance" checked> Relevance
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="searchCriteria" id="startDate" value="startDate"> Start Date
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="searchCriteria" id="price" value="price"> Ticket price
+							</label>
+						</div>
+					</div>
+					@if (signInManager.IsSignedIn(User))
+					{
+						<div class="form-group">
+							<label class="custom-checkbox">
+								<input type="checkbox" class="custom-checkbox-input" value="true" name="onlyFavorites" />
+								<i class="glyphicon glyphicon-star-empty"></i>
+								<i class="glyphicon glyphicon-star"></i>
+								<span>Only Favorites</span>
+							</label>
+						</div>
+					}
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h2>Events</h2>
+		@if (Model.Any())
+		{
+			<table class="table table-bordered">
+
+				<thead class="thead-dark">
+					<tr>
+						<th></th>
+						<th>
+							@Html.DisplayNameFor(model => model.Name)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Type)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.City)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.StartTime)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.EndTime)
+						</th>
+						<th style="width: 90px" scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var eventModel in Model)
+					{
+						<tr>
+							<td>
+								<a asp-action="Details" asp-route-id="@eventModel.Id">
+									<img class="img-responsive" src="~/images/eventImages/@eventModel.ImageName" alt="">
+								</a>
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => eventModel.Name)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => eventModel.Type)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => eventModel.City)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => eventModel.StartTime)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => eventModel.EndTime)
+							</td>
+							<td class="glyphicon glyphicon-question-sign">
+								<a class="action-btn" asp-action="Details" asp-route-id="@eventModel.Id">Details</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+		else
+		{
+			<div class="events-empty">
+				No events found for your search request.
+			</div>
+		}
+	</div>
+</div>
