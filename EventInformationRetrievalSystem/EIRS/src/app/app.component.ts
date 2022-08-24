@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'irs-root',
-  templateUrl: './app.component.html'
+  selector: 'eirs-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   public forecasts?: WeatherForecast[];
