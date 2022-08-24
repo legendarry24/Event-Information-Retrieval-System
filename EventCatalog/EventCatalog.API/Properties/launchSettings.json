@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "EIRS.API": {
+    "EventCatalog.API": {
       "commandName": "Project",
       "launchUrl": "swagger",
       "environmentVariables": {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EIRS.API.Controllers
+namespace EventCatalog.API.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]

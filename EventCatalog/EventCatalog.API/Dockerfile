@@ -10,16 +10,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["EIRS.API/EIRS.API.csproj", "EIRS.API/"]
-RUN dotnet restore "EIRS.API/EIRS.API.csproj"
+COPY ["EventCatalog.API/EventCatalog.API.csproj", "EventCatalog.API/"]
+RUN dotnet restore "EventCatalog.API/EventCatalog.API.csproj"
 COPY . .
-WORKDIR "/src/EIRS.API"
-RUN dotnet build "EIRS.API.csproj" -c Release -o /app/build
+WORKDIR "/src/EventCatalog.API"
+RUN dotnet build "EventCatalog.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "EIRS.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "EventCatalog.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "EIRS.API.dll"]
+ENTRYPOINT ["dotnet", "EventCatalog.API.dll"]

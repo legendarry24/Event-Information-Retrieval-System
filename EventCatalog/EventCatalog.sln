@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventCatalog.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventCatalog.WebClient", "EventCatalog.WebClient\EventCatalog.WebClient.csproj", "{3B4CFDF5-A16F-4B8A-ABFA-701AE998550D}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EIRS", "EIRS\EIRS.esproj", "{BA67BBD9-D01F-48F6-BAF9-4712514AFECB}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EventCatalogUI", "EventCatalogUI\EventCatalogUI.esproj", "{BA67BBD9-D01F-48F6-BAF9-4712514AFECB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIRS.API", "EIRS.API\EIRS.API.csproj", "{7DB57E71-F783-4267-ABEC-5D64683AAE51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventCatalog.API", "EventCatalog.API\EventCatalog.API.csproj", "{7DB57E71-F783-4267-ABEC-5D64683AAE51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

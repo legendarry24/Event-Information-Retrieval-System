@@ -1,4 +1,4 @@
-namespace EIRS.API
+namespace EventCatalog.API
 {
 	public class Program
 	{

@@ -3,17 +3,17 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EIRS": {
+    "event-catalog": {
       "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "eirs",
+      "prefix": "ec",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/eirs",
+            "outputPath": "dist/event-catalog",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "EIRS:build:production"
+              "browserTarget": "event-catalog:build:production"
             },
             "development": {
-              "browserTarget": "EIRS:build:development"
+              "browserTarget": "event-catalog:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EIRS:build"
+            "browserTarget": "event-catalog:build"
           }
         },
         "test": {
