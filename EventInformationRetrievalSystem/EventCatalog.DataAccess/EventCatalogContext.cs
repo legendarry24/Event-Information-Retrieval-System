@@ -2,9 +2,9 @@
 using EventCatalog.DataAccess.EntityConfigurations;
 using EventCatalog.Domain.Models;
 using EventCatalog.Domain.Models.EventAggregate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace EventCatalog.DataAccess
 {
