@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EventCatalog.Service.Models
+﻿namespace EventCatalog.API.Models
 {
 	public class EventUserIdentity
 	{
@@ -10,8 +8,8 @@ namespace EventCatalog.Service.Models
 			UserId = userId;
 		}
 
-		public Guid EventId { get; private set; }
+		public Guid EventId { get; }
 
-		public Guid UserId { get; private set; }
+		public Guid UserId { get; }
 	}
 }

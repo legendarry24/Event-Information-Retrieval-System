@@ -22,3 +22,28 @@
         </tr>
     </tbody>
 </table>
+
+<table *ngIf="events$ | async as events">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>City</th>
+			<th>Street</th>
+			<th>Venue</th>
+			<th>OrganizerSite</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let event of events">
+			<td>{{ event.name }}</td>
+			<td>{{ event.type }}</td>
+			<td>{{ event.city }}</td>
+			<td>{{ event.street }}</td>
+			<td>{{ event.venue }}</td>
+			<td>{{ event.organizerSite }}</td>
+			<td>{{ event.price | currency }}</td>
+		</tr>
+	</tbody>
+</table>

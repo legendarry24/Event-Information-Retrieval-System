@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using EventCatalog.API.Models;
 using EventCatalog.Domain.Contracts;
 using EventCatalog.Domain.Models;
 using EventCatalog.Domain.Models.EventAggregate;
-using EventCatalog.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventCatalog.WebService.ApiControllers
+namespace EventCatalog.API.Controllers
 {
 	[Produces("application/json")]
 	[Route("api/[controller]")]
@@ -35,21 +33,21 @@ namespace EventCatalog.WebService.ApiControllers
 		[HttpGet("{id}")]
 		public IActionResult GetEvent(Guid id)
 		{
-			var eventEntity = _unitOfWork.EventRepository.GetById(id);
+			Event? eventEntity = _unitOfWork.EventRepository.GetById(id);
 
 			if (eventEntity == null)
 			{
 				return NotFound();
 			}
 
-			var eventToReturn = MapModel(eventEntity);
+			EventDto eventToReturn = MapModel(eventEntity);
 
 			return Ok(eventToReturn);
 		}
 
 		// POST api/events
 		[HttpPost]
-		public IActionResult CreateEvent([FromBody] EventDto eventDto)
+		public IActionResult CreateEvent([FromBody] EventDto? eventDto)
 		{
 			if (eventDto == null)
 			{
@@ -61,24 +59,24 @@ namespace EventCatalog.WebService.ApiControllers
 				return BadRequest(ModelState);
 			}
 
-			var eventEntity = MapModel(eventDto);
+			Event eventEntity = MapModel(eventDto);
 
 			_unitOfWork.EventRepository.Add(eventEntity);
 			_unitOfWork.Save();
 
-			return CreatedAtAction(nameof(GetEvent), new {id = eventEntity.Id}, eventEntity);
+			return CreatedAtAction(nameof(GetEvent), new { id = eventEntity.Id }, eventEntity);
 		}
 
 		// PUT api/events/5
 		[HttpPut("{id}")]
-		public IActionResult UpdateEvent(Guid id, [FromBody] EventDto eventDto)
+		public IActionResult UpdateEvent(Guid id, [FromBody] EventDto? eventDto)
 		{
 			if (eventDto == null)
 			{
 				return BadRequest();
 			}
 
-			var eventEntity = _unitOfWork.EventRepository.GetById(id);
+			Event? eventEntity = _unitOfWork.EventRepository.GetById(id);
 			if (eventEntity == null)
 			{
 				return NotFound();
@@ -107,7 +105,7 @@ namespace EventCatalog.WebService.ApiControllers
 		[HttpPut("addToFavorites/{eventId}")]
 		public IActionResult AddToFavorites(Guid eventId, [FromBody] EventUserIdentity eventUserIdentity)
 		{
-			var eventEntity = _unitOfWork.EventRepository.GetById(eventId);
+			Event? eventEntity = _unitOfWork.EventRepository.GetById(eventId);
 			if (eventEntity == null)
 			{
 				return NotFound();
@@ -118,9 +116,8 @@ namespace EventCatalog.WebService.ApiControllers
 				return BadRequest();
 			}
 
-			bool entryExists = eventEntity.
-				PotentialAttendees.Any(f => f.UserId == eventUserIdentity.UserId &&
-											f.EventId == eventEntity.Id);
+			bool entryExists = eventEntity.PotentialAttendees.Any(f =>
+				f.UserId == eventUserIdentity.UserId && f.EventId == eventEntity.Id);
 
 			if (!entryExists)
 			{
@@ -140,7 +137,7 @@ namespace EventCatalog.WebService.ApiControllers
 		[HttpDelete("{id}")]
 		public IActionResult DeleteEvent(Guid id)
 		{
-			var eventEntity = _unitOfWork.EventRepository.GetById(id);
+			Event? eventEntity = _unitOfWork.EventRepository.GetById(id);
 			if (eventEntity == null)
 			{
 				return NotFound();

@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventCatalog.DataAccess\EventCatalog.DataAccess.csproj" />
-    <ProjectReference Include="..\EventCatalog.Service\EventCatalog.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

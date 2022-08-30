@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using EventCatalog.Domain.Contracts;
 using EventCatalog.Domain.Models;
 
-namespace EventCatalog.Service.Models
+namespace EventCatalog.API.Models
 {
 	public class EventDto
 	{
@@ -21,10 +19,10 @@ namespace EventCatalog.Service.Models
 		public string City { get; set; }
 
 		[MaxLength(100)]
-		public string Street { get; set; }
+		public string? Street { get; set; }
 
 		[MaxLength(100)]
-		public string Venue { get; set; }
+		public string? Venue { get; set; }
 
 		public DateTime StartTime { get; set; }
 
@@ -38,10 +36,10 @@ namespace EventCatalog.Service.Models
 
 		public Currency Currency { get; set; }
 
-		public string Description { get; set; }
+		public string? Description { get; set; }
 
-		public string ImageFileName { get; set; }
+		public string? ImageFileName { get; set; }
 
-		public ICollection<FavoriteEvent> PotentialAttendees { get; set; }
+		public ICollection<FavoriteEvent>? PotentialAttendees { get; set; }
 	}
 }

@@ -1,21 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ec-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'ec-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public forecasts?: WeatherForecast[];
+export class AppComponent implements OnInit {
+	public title = 'EventCatalog';
+	public forecasts?: WeatherForecast[];
+	public events$: Observable<Event[]> = this.http.get<Event[]>('/api/events');
 
-  constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
-  }
+	constructor(private http: HttpClient) {}
 
-  title = 'EventCatalog';
+	ngOnInit(): void {
+		this.http.get<WeatherForecast[]>('/weatherforecast')
+			.subscribe(result => {
+				this.forecasts = result;
+			}, error => console.error(error));
+	}
 }
 
 interface WeatherForecast {
@@ -23,4 +27,21 @@ interface WeatherForecast {
   temperatureC: number;
   temperatureF: number;
   summary: string;
+}
+
+interface Event {
+	id: number;
+	name: string;
+	type: string;
+	city: string;
+	street: string;
+	venue: string;
+	startTime: string;
+	endTime: string;
+	organizerSite: string;
+	price: number;
+	currency: number;
+	description: string;
+	imageFileName: string;
+	potentialAttendees: object[];
 }

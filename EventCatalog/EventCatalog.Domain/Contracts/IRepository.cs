@@ -11,6 +11,6 @@ namespace EventCatalog.Domain.Contracts
 
 		void Add(T entity);
 
-		void Remove(Guid Id);
+		void Remove(Guid id);
 	}
 }

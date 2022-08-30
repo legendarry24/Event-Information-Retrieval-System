@@ -25,7 +25,7 @@ namespace EventCatalog.DataAccess.Repositories
 
 		public Event GetById(Guid id)
 		{
-			var eventEntity = _eventEntities
+			Event eventEntity = _eventEntities
 				.Where(e => e.Id == id)
 				.Include(e => e.PotentialAttendees)
 				.FirstOrDefault();
@@ -38,11 +38,14 @@ namespace EventCatalog.DataAccess.Repositories
 			_eventEntities.Add(entity);
 		}
 
-		public void Remove(Guid Id)
+		public void Remove(Guid id)
 		{
-			var eventEntity = _eventEntities.Find(Id);
+			Event eventEntity = _eventEntities.Find(id);
 
-			_eventEntities.Remove(eventEntity);
+			if (eventEntity != null)
+			{
+				_eventEntities.Remove(eventEntity);
+			}
 		}
 	}
 }
