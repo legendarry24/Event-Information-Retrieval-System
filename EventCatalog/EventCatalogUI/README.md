@@ -1,5 +1,11 @@
 # EventCatalog
 
+## Lint & Format
+
+Run the following commands to install ESLint and Prettier with their dependencies:
+`ng add @angular-eslint/schematics`
+`npm install eslint eslint-config-prettier eslint-plugin-prettier prettier --save-dev`
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
 ## Development server
