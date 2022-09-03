@@ -4,7 +4,10 @@
 
 Run the following commands to install ESLint and Prettier with their dependencies:
 `ng add @angular-eslint/schematics`
+
 `npm install eslint eslint-config-prettier eslint-plugin-prettier prettier --save-dev`
+
+Run the following command to fix all the fixable Lint errors in the project: `ng lint --fix`
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 

@@ -15,18 +15,20 @@ export class AppComponent implements OnInit {
 	constructor(private http: HttpClient) {}
 
 	ngOnInit(): void {
-		this.http.get<WeatherForecast[]>('/weatherforecast')
-			.subscribe(result => {
+		this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
+			result => {
 				this.forecasts = result;
-			}, error => console.error(error));
+			},
+			error => console.error(error)
+		);
 	}
 }
 
 interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+	date: string;
+	temperatureC: number;
+	temperatureF: number;
+	summary: string;
 }
 
 interface Event {
